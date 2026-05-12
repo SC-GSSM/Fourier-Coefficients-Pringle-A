@@ -1,0 +1,30 @@
+{
+  "name": "Lean and LaTeX",
+  "image": "mcr.microsoft.com/devcontainers/base:ubuntu-24.04",
+  "features": {
+    "ghcr.io/devcontainers/features/common-utils:2": {}
+  },
+  "remoteEnv": {
+    "PATH": "/home/vscode/.elan/bin:${containerEnv:PATH}"
+  },
+  "customizations": {
+    "vscode": {
+      "extensions": [
+        "leanprover.lean4",
+        "James-Yu.latex-workshop",
+        "tomoki1207.pdf",
+        "DavidAnson.vscode-markdownlint",
+        "yzhang.markdown-all-in-one",
+        "streetsidesoftware.code-spell-checker",
+        "GitHub.vscode-pull-request-github"
+      ],
+      "settings": {
+        "editor.formatOnSave": true,
+        "latex-workshop.latex.autoBuild.run": "onSave",
+        "latex-workshop.latex.outDir": "%DIR%",
+        "latex-workshop.view.pdf.viewer": "tab"
+      }
+    }
+  },
+  "postCreateCommand": "sudo apt-get update && sudo apt-get install -y ca-certificates curl latexmk chktex texlive-latex-extra texlive-fonts-recommended texlive-science texlive-pictures texlive-xetex && if ! command -v elan >/dev/null 2>&1; then curl -sSf https://raw.githubusercontent.com/leanprover/elan/master/elan-init.sh | sh -s -- -y --default-toolchain none; fi && bash -lc 'export PATH=\"$HOME/.elan/bin:$PATH\"; cd \"LeanWithMathLib\" && lake exe cache get || true'"
+}
